@@ -59,9 +59,25 @@ socket.on("timeUpdate", ({ whiteTime, blackTime }) => {
   if (playerRole === "w") {
     document.getElementById("white-timer").innerText = formatTime(whiteTime);
     document.getElementById("black-timer").innerText = formatTime(blackTime);
+
+    if (chess.turn() === "w") {
+      document.getElementById("white-timer").style.backgroundColor = "red";
+      document.getElementById("black-timer").style.backgroundColor = "grey";
+    } else {
+      document.getElementById("white-timer").style.backgroundColor = "grey";
+      document.getElementById("black-timer").style.backgroundColor = "red";
+    }
   } else {
     document.getElementById("white-timer").innerText = formatTime(blackTime);
     document.getElementById("black-timer").innerText = formatTime(whiteTime);
+
+    if (chess.turn() === "b") {
+      document.getElementById("white-timer").style.backgroundColor = "red";
+      document.getElementById("black-timer").style.backgroundColor = "grey";
+    } else {
+      document.getElementById("white-timer").style.backgroundColor = "grey";
+      document.getElementById("black-timer").style.backgroundColor = "red";
+    }
   }
 });
 
@@ -76,6 +92,7 @@ const formatTime = (time) => {
 
 socket.on("playerRole", (role) => {
   playerRole = role;
+
   if (playerRole === "w") {
     document.getElementById("white-player").innerText = "Opponent (Black)";
     document.getElementById("black-player").innerText = "You (White)";
